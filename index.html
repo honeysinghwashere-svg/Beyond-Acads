@@ -33,10 +33,8 @@
         <!-- Header -->
         <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-t-2xl flex items-center justify-between shadow-md">
             <div class="flex items-center">
-                <div class="w-12 h-12 bg-white/30 rounded-full flex items-center justify-center mr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7s-8-3.134-8-7c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.293 5.707a1 1 0 010 1.414 5 5 0 01-7.072 0 1 1 0 011.414-1.414 3 3 0 004.244 0 1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
+                <div class="w-12 h-12 bg-white/30 rounded-full flex items-center justify-center mr-4 overflow-hidden">
+                    <img src="https://i.ibb.co/mG5Yqg5/324234.jpg" alt="Profile Picture" class="w-full h-full object-cover">
                 </div>
                 <div>
                     <h1 class="text-xl font-bold">Beyond Acads</h1>
@@ -49,10 +47,8 @@
         <div id="chat-messages" class="flex-1 p-6 overflow-y-auto">
             <!-- Initial bot message -->
             <div class="flex items-start gap-3 mb-4">
-                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
-                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7s-8-3.134-8-7c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.293 5.707a1 1 0 010 1.414 5 5 0 01-7.072 0 1 1 0 011.414-1.414 3 3 0 004.244 0 1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
+                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+                   <img src="https://i.ibb.co/mG5Yqg5/324234.jpg" alt="Bot Avatar" class="w-full h-full object-cover">
                 </div>
                 <div class="bg-gray-200 p-3 rounded-lg max-w-md">
                     <p class="text-sm text-gray-800">👋 Welcome to Beyond Acads!</p>
@@ -140,10 +136,8 @@
                 const formattedMessage = message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
                 messageHtml = `
                     <div class="flex items-start gap-3 mb-4">
-                        <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7s-8-3.134-8-7c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.293 5.707a1 1 0 010 1.414 5 5 0 01-7.072 0 1 1 0 011.414-1.414 3 3 0 004.244 0 1 1 0 011.414 0z" clip-rule="evenodd" />
-                            </svg>
+                        <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+                            <img src="https://i.ibb.co/mG5Yqg5/324234.jpg" alt="Bot Avatar" class="w-full h-full object-cover">
                         </div>
                         <div class="bg-gray-200 p-3 rounded-lg max-w-md">
                             <p class="text-sm text-gray-800">${formattedMessage}</p>
@@ -162,10 +156,8 @@
             loadingElement.id = 'loading-indicator';
             loadingElement.innerHTML = `
                 <div class="flex items-start gap-3 mb-4">
-                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
-                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7s-8-3.134-8-7c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.293 5.707a1 1 0 010 1.414 5 5 0 01-7.072 0 1 1 0 011.414-1.414 3 3 0 004.244 0 1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
+                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+                       <img src="https://i.ibb.co/mG5Yqg5/324234.jpg" alt="Bot Avatar" class="w-full h-full object-cover">
                     </div>
                     <div class="bg-gray-200 p-3 rounded-lg max-w-xs">
                         <div class="flex items-center justify-center space-x-1">
@@ -203,7 +195,7 @@
 
             try {
                 // Call the Gemini API
-                const apiKey = "AIzaSyAQzezVKjdXbMElqFTagflkAUU0EhOQagk"; // Leave empty, will be handled by the environment
+                const apiKey = "AIzaSyAQzezVKjdXbMElqFTagflkAUU0EhOQagk"; // IMPORTANT: PASTE YOUR API KEY HERE
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
                 
                 const payload = { contents: chatHistory };
@@ -245,4 +237,3 @@
     </script>
 </body>
 </html>
-
