@@ -34,7 +34,7 @@
         <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-t-2xl flex items-center justify-between shadow-md">
             <div class="flex items-center">
                 <div class="w-12 h-12 bg-white/30 rounded-full flex items-center justify-center mr-4 overflow-hidden">
-                    <img src="https://i.ibb.co/mG5Yqg5/324234.jpg" alt="Profile Picture" class="w-full h-full object-cover">
+                    <img src="https://ik.imagekit.io/97vbpbrok/WhatsApp%20Image%202025-08-17%20at%2004.17.34_f48ad4a5.jpg?updatedAt=1755775633765" alt="Profile Picture" class="w-full h-full object-cover">
                 </div>
                 <div>
                     <h1 class="text-xl font-bold">Beyond Acads</h1>
@@ -48,7 +48,7 @@
             <!-- Initial bot message -->
             <div class="flex items-start gap-3 mb-4">
                 <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
-                   <img src="https://i.ibb.co/mG5Yqg5/324234.jpg" alt="Bot Avatar" class="w-full h-full object-cover">
+                   <img src="https://ik.imagekit.io/97vbpbrok/WhatsApp%20Image%202025-08-17%20at%2004.17.34_f48ad4a5.jpg?updatedAt=1755775633765" alt="Bot Avatar" class="w-full h-full object-cover">
                 </div>
                 <div class="bg-gray-200 p-3 rounded-lg max-w-md">
                     <p class="text-sm text-gray-800">👋 Welcome to Beyond Acads!</p>
@@ -76,21 +76,31 @@
         const chatForm = document.getElementById('chat-form');
         const userInput = document.getElementById('user-input');
 
-        // This will hold the conversation history, primed with the chatbot's persona.
+        // Data from the Google Sheet, converted to JSON format. This is the chatbot's knowledge base.
+        const examData = [
+            { "Organisation": "THDC India Limited", "Post Name": "Accounts Officer", "Qualification": "CA/CMA", "Experience": "1 Year", "No of Post": 25, "Last Date": "08-Jul-24", "Link": "https://thdc.co.in/sites/default/files/Advt_for_E2_Grade_Post_Code_11_to_20.pdf" },
+            { "Organisation": "RITES Ltd", "Post Name": "Assistant Manager (Finance)", "Qualification": "CA/CMA", "Experience": "2 Years", "No of Post": 10, "Last Date": "04-Jul-24", "Link": "https://www.rites.com/Upload/Career/24_24_AM_Fin_vac_200624.pdf" },
+            { "Organisation": "Gujarat Metro Rail Corporation (GMRC) Limited", "Post Name": "Manager (Finance & Accounts)", "Qualification": "CA/CMA", "Experience": "9 Years", "No of Post": 2, "Last Date": "26-Jun-24", "Link": "https://www.gujaratmetrorail.com/wp-content/uploads/2024/05/GMRC_Recruitment-Notification-for-various-posts-for-F-A-and-HR-Dept-Final-24.05.2024.pdf" },
+            { "Organisation": "Grid Controller of India Limited (Grid-India)", "Post Name": "Sr. Accounts Officer", "Qualification": "CA/CMA", "Experience": "3 Years", "No of Post": 15, "Last Date": "30-Jun-24", "Link": "https://grid-india.in/wp-content/uploads/2024/06/Detailed-Advt.-for-recruitment-of-experienced-professionals-in-Grid-India.pdf" },
+            { "Organisation": "Indian Oil Corporation Limited (IOCL)", "Post Name": "Finance Executive", "Qualification": "CA/CMA", "Experience": "3 Years", "No of Post": 6, "Last Date": "02-Jul-24", "Link": "https://iocl.com/admin/img/Upload/Private/5_DetailedadvertisementforemploymentofFinanceexecutivesoncontractbasis.pdf" },
+            { "Organisation": "Rail Vikas Nigam Limited (RVNL)", "Post Name": "Manager (Finance)", "Qualification": "CA/CMA", "Experience": "PSU Employee", "No of Post": 4, "Last Date": "10-Jul-24", "Link": "https://rvnl.org/uploads/opportunity/opportunity_doc_qrG1v.pdf" },
+            { "Organisation": "Rail Vikas Nigam Limited (RVNL)", "Post Name": "Dy. Manager (Finance)", "Qualification": "CA/CMA", "Experience": "PSU Employee", "No of Post": 4, "Last Date": "10-Jul-24", "Link": "https://rvnl.org/uploads/opportunity/opportunity_doc_qrG1v.pdf" },
+            { "Organisation": "Rail Vikas Nigam Limited (RVNL)", "Post Name": "Assistant Manager (Finance)", "Qualification": "CA/CMA", "Experience": "PSU Employee", "No of Post": 10, "Last Date": "10-Jul-24", "Link": "https://rvnl.org/uploads/opportunity/opportunity_doc_qrG1v.pdf" }
+        ];
+
+        // This will hold the conversation history, primed with the chatbot's persona and knowledge base.
         let chatHistory = [
             {
                 role: "user",
                 parts: [{ text: `
                     # Objective:
-                    You are an expert career and exam guidance assistant. Your role is to help aspirants stay updated on upcoming Government exams that require CA and CMA qualifications. Always provide clear information about:
-                    - Organisation name
-                    - Post/role details
-                    - Eligibility (CA, CMA, MBA, etc.)
-                    - Pay scale / CTC
-                    - Work experience required
-                    - Number of vacancies (category-wise, if available)
-                    - Application deadlines
-                    - Official application link
+                    You are an expert career and exam guidance assistant. Your role is to help aspirants stay updated on upcoming Government exams that require CA and CMA qualifications. 
+                    
+                    # Knowledge Source:
+                    You MUST answer questions based ONLY on the following JSON data. Do not use any other knowledge.
+                    \`\`\`json
+                    ${JSON.stringify(examData)}
+                    \`\`\`
 
                     # Style:
                     - Be friendly, professional, and encouraging.
@@ -99,16 +109,16 @@
                     - Use relevant emojis (📌, ⏰, 💼, 📝) to make it engaging.
 
                     # Rules:
-                    1. Always fetch exam details from the knowledge source provided. Do not guess.
-                    2. If details are incomplete or unclear, explicitly mention what is missing.
-                    3. If asked outside the scope of CA/CMA exams, politely decline and redirect to exam-related support.
+                    1. Always use the provided JSON data as your single source of truth. Do not guess or infer information not present in the data.
+                    2. If the data for a specific field is missing or unclear in the JSON, explicitly mention that the detail is not available.
+                    3. If asked about something outside the scope of the provided exam data (e.g., other exams, general advice), politely decline and redirect to exam-related support.
                     4. Keep answers short and easy to understand.
                     5. At the end of relevant answers, include the following message: "We also help participants prepare for these exams. This initiative is run by two professionals (CMAs). For more information you can join the community on Whatsapp (http://chat.whatsapp.com/CHZttXz86jW4hZkLNzDSeb?mode=ac_t) and Telegram (http://t.me/BeyondAcadsGovtJob)"
                 `}]
             },
             {
                 role: "model",
-                parts: [{ text: "Understood. I am the Beyond Acads assistant. I will act as an expert career and exam guidance counselor for CA/CMA government exams, following all specified objectives, styles, and rules. I am ready to assist." }]
+                parts: [{ text: "Understood. I am the Beyond Acads assistant. I will act as an expert career and exam guidance counselor, answering questions based *only* on the provided data about CA/CMA government exams. I am ready to assist." }]
             }
         ];
 
@@ -137,7 +147,7 @@
                 messageHtml = `
                     <div class="flex items-start gap-3 mb-4">
                         <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
-                            <img src="https://i.ibb.co/mG5Yqg5/324234.jpg" alt="Bot Avatar" class="w-full h-full object-cover">
+                            <img src="https://ik.imagekit.io/97vbpbrok/WhatsApp%20Image%202025-08-17%20at%2004.17.34_f48ad4a5.jpg?updatedAt=1755775633765" alt="Bot Avatar" class="w-full h-full object-cover">
                         </div>
                         <div class="bg-gray-200 p-3 rounded-lg max-w-md">
                             <p class="text-sm text-gray-800">${formattedMessage}</p>
@@ -157,7 +167,7 @@
             loadingElement.innerHTML = `
                 <div class="flex items-start gap-3 mb-4">
                     <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
-                       <img src="https://i.ibb.co/mG5Yqg5/324234.jpg" alt="Bot Avatar" class="w-full h-full object-cover">
+                       <img src="https://ik.imagekit.io/97vbpbrok/WhatsApp%20Image%202025-08-17%20at%2004.17.34_f48ad4a5.jpg?updatedAt=1755775633765" alt="Bot Avatar" class="w-full h-full object-cover">
                     </div>
                     <div class="bg-gray-200 p-3 rounded-lg max-w-xs">
                         <div class="flex items-center justify-center space-x-1">
